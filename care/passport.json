@@ -1,0 +1,125 @@
+{
+  "passport": {
+    "format": "Voluntary digital product passport. Laid out like the content the EU Joint Research Centre proposed for textile apparel in May 2026 (Study on DPP content for textile apparel products under ESPR). Not yet required by law.",
+    "status": "Prototype",
+    "version": "0.1",
+    "updated": "2026-11-10",
+    "url": "https://nike.lucasfmiller.com/care/",
+    "dataCarrier": "NFC tag in the jacket (opens nike.lucasfmiller.com)"
+  },
+  "identification": {
+    "product": "Rear Radar Jacket",
+    "model": "Prototype",
+    "modelId": null,
+    "batch": null,
+    "serial": null,
+    "gtin": null
+  },
+  "producer": {
+    "designer": "Lucas Miller",
+    "manufacturer": null,
+    "address": null,
+    "facility": null,
+    "countryOfManufacture": null
+  },
+  "composition": [
+    {
+      "part": "Body",
+      "construction": "Fleece",
+      "textile": true,
+      "fibres": [
+        {
+          "fibre": "Cotton",
+          "percent": 100
+        }
+      ]
+    },
+    {
+      "part": "Pockets",
+      "construction": "Vinyl laminate",
+      "textile": false,
+      "fibres": []
+    }
+  ],
+  "care": {
+    "symbols": [
+      {
+        "id": "wash30",
+        "process": "Washing",
+        "title": "Machine wash cold",
+        "text": "30 °C max, normal cycle"
+      },
+      {
+        "id": "tumbleLow",
+        "process": "Tumble drying",
+        "title": "Tumble dry low",
+        "text": "Warm, not hot: 60 °C max"
+      }
+    ],
+    "toConfirm": [
+      {
+        "process": "Bleaching",
+        "suggested": "noBleach"
+      },
+      {
+        "process": "Ironing",
+        "suggested": "ironLow",
+        "note": "Keep the iron off the vinyl pockets"
+      },
+      {
+        "process": "Professional cleaning",
+        "suggested": "noDryClean"
+      }
+    ],
+    "beforeWashing": [
+      "Unplug both sleeve motors from the radar unit",
+      "Take the radar unit off the jacket"
+    ],
+    "afterWashing": [
+      "Let the jacket dry completely before plugging the motors back in"
+    ],
+    "notes": [
+      "The sleeve motors are sealed and stay in the jacket"
+    ]
+  },
+  "electronics": {
+    "removable": [
+      {
+        "part": "Radar unit",
+        "where": "Upper back",
+        "contains": "24 GHz radar (LD2450), ESP32-C3 controller, motion sensor (MPU-6050)",
+        "power": "USB-C"
+      }
+    ],
+    "stayIn": [
+      {
+        "part": "Sleeve motors",
+        "where": "Left and right wrist",
+        "note": "Sealed coin vibration motors on leads that plug into the radar unit (L and R)"
+      }
+    ],
+    "radio": "Bluetooth Low Energy and Wi-Fi (2.4 GHz) from the controller; 24 GHz radar"
+  },
+  "durability": {
+    "robustnessScore": null
+  },
+  "substancesOfConcern": null,
+  "recycledContent": null,
+  "organicContent": null,
+  "environmentalFootprint": null,
+  "repair": [
+    "Each motor plugs into the radar unit (L and R), so either one can be swapped on its own"
+  ],
+  "endOfLife": [
+    "Radar unit and motors: electrical waste (WEEE) collection, not textile recycling",
+    "Jacket: textile collection once the motors and their leads are taken out"
+  ],
+  "documents": [],
+  "media": {
+    "model3d": {
+      "glb": "models/jacket.glb",
+      "usdz": "models/jacket.usdz"
+    },
+    "fabricationPhoto": "images/fabrication.jpg"
+  }
+}

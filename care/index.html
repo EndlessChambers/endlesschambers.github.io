@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rear Radar Jacket: care and passport</title>
+<meta name="description" content="Digital care label and product passport for the Rear Radar Jacket prototype.">
+<meta name="theme-color" content="#ffffff">
+<!--
+  The jacket's digital care label and product passport. Everything on this page comes from
+  passport.json next to it (the same data, built in below so the page also works on its own).
+  To change a care line or the materials: edit passport.json, then the copy in this page
+  (between PASSPORT= and the end of that line), or ask Claude to rebuild it.
+
+  The 3D model and the fabrication photo show up by themselves once these files are here:
+    care/models/jacket.glb     the 3D model (glTF binary; the iPhone's AR view uses jacket.usdz)
+    care/models/jacket.usdz    optional, for "View in your space" on an iPhone
+    care/images/fabrication.jpg
+-->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+<style>
+:root{
+ --ink:#1C1C1E;--ink2:#6C6C70;--accent:#0A7AFF;--good:#34C759;--moving:#FF9500;--closing:#FF3B30;
+ --fill:rgba(0,0,0,.06);--fill2:rgba(0,0,0,.04);--hair:rgba(0,0,0,.08);
+ --text:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI",Roboto,sans-serif;
+ --round:"SF Pro Rounded",ui-rounded,-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff}
+body{font-family:var(--text);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+svg{display:block}
+[hidden]{display:none!important}
+.aura{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.a1{width:clamp(420px,70vw,900px);height:clamp(420px,70vw,900px);left:-22vw;top:-30vw;background:var(--accent);opacity:.16}
+.a2{width:clamp(360px,60vw,800px);height:clamp(360px,60vw,800px);right:-20vw;bottom:-26vw;background:var(--good);opacity:.10}
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:22px 16px 48px;display:flex;flex-direction:column;gap:14px}
+.glass{position:relative;background:rgba(255,255,255,.62);
+ -webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);
+ box-shadow:0 12px 24px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04),0 0 0 .5px rgba(0,0,0,.05),inset 0 1px 0 rgba(255,255,255,.85)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+ background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.25) 50%,rgba(255,255,255,.7));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.card{border-radius:30px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.back{font-size:15px}
+h1{margin:6px 2px 0;font-family:var(--round);font-size:34px;line-height:40px;font-weight:700}
+.lead{margin:4px 2px 0;font-size:17px;line-height:23px;color:var(--ink2)}
+.badge{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:999px;background:rgba(255,149,0,.16);color:#B25E00;font-size:13px;font-weight:600;vertical-align:6px}
+h2{margin:0;font-family:var(--round);font-size:20px;line-height:25px;font-weight:700}
+.sub{margin:3px 0 0;font-size:13px;line-height:18px;color:var(--ink2)}
+.media{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:700px){.media{grid-template-columns:1.25fr 1fr}}
+.slot{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:1;background:linear-gradient(rgba(255,255,255,.95),rgba(241,244,248,.9));
+ box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);display:grid;place-items:center}
+.slot model-viewer,.slot img{width:100%;height:100%;display:block;object-fit:cover;--poster-color:transparent;background:transparent}
+.ph{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:20px;color:var(--ink2);font-size:14px;line-height:19px;max-width:280px}
+.ph svg{width:46px;height:46px;color:rgba(0,0,0,.25)}
+.ph b{color:var(--ink);font-size:15px}
+.cap{font-size:13px;color:var(--ink2);margin:8px 2px 0}
+.care{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.crow{display:flex;align-items:center;gap:14px;padding:14px;border-radius:20px;background:var(--fill2)}
+.csym{width:46px;height:46px;flex:none;color:var(--ink)}
+.crow b{display:block;font-size:16px;line-height:20px;font-weight:600}
+.crow small{display:block;font-size:13px;line-height:17px;color:var(--ink2);margin-top:2px}
+.warn{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:20px;background:rgba(255,149,0,.13)}
+.warn svg{width:40px;height:40px;flex:none;color:#B25E00}
+.warn b{display:block;font-size:15px;margin-bottom:4px}
+ol,ul{margin:0;padding-left:20px;font-size:15px;line-height:21px}
+li+li{margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:15px;line-height:20px}
+th{text-align:left;font-weight:500;color:var(--ink2);width:42%;padding:9px 12px 9px 0;vertical-align:top}
+td{padding:9px 0;font-weight:500}
+tr+tr th,tr+tr td{border-top:1px solid var(--hair)}
+h3{margin:4px 0 0;font-size:13px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+.note{margin:0;font-size:13px;line-height:18px;color:var(--ink2)}
+.pill{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:18px;background:rgba(10,122,255,.12);color:var(--accent);font-size:15px;font-weight:600}
+footer{text-align:center;font-size:12px;color:var(--ink2);opacity:.85;margin-top:4px}
+@media (min-width:700px){.page{padding-top:40px}h1{font-size:40px;line-height:46px}}
+</style></head><body>
+<div class="aura a1"></div><div class="aura a2"></div>
+<main class="page">
+ <a class="back" href="../">‹ Rear Radar</a>
+ <header><h1 id="name">Rear Radar Jacket</h1><p class="lead">Care label and product passport <span class="badge" id="status">Prototype</span></p></header>
+
+ <div class="media">
+  <section class="glass card"><div><h2>The jacket in 3D</h2><p class="sub">Drag to turn it</p></div>
+   <div class="slot" id="model"><div class="ph"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l17 9.5v19L24 43 7 33.5v-19z"/><path d="M7 14.5L24 24l17-9.5M24 24v19"/></svg><b>3D model coming soon</b>Put it at care/models/jacket.glb and it shows up here.</div></div>
+  </section>
+  <section class="glass card"><div><h2>Fabrication</h2><p class="sub" id="compShort"></p></div>
+   <div class="slot" id="photo"><div class="ph"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="30" rx="5"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l10-9 8 7 6-5 12 10"/></svg><b>Photo coming soon</b>Put it at care/images/fabrication.jpg and it shows up here.</div></div>
+  </section>
+ </div>
+
+ <section class="glass card"><div><h2>Care</h2><p class="sub">Wash and dry it like this, with the radar unit out</p></div>
+  <div class="warn" id="before"></div>
+  <div class="care" id="symbols"></div>
+  <ul id="after"></ul>
+ </section>
+
+ <section class="glass card"><div><h2>Materials</h2></div>
+  <table id="materials"></table>
+ </section>
+
+ <section class="glass card"><div><h2>Electronics</h2><p class="sub">What comes out, what stays in</p></div>
+  <table id="electronics"></table>
+  <h3>Repair</h3><ul id="repair"></ul>
+  <h3>End of life</h3><ul id="eol"></ul>
+ </section>
+
+ <section class="glass card"><div><h2>Product passport</h2><p class="sub" id="pformat"></p></div>
+  <table id="passport"></table>
+  <div><a class="pill" href="passport.json" download>Download passport.json</a></div>
+  <p class="note" id="law"></p>
+ </section>
+
+ <footer id="foot"></footer>
+</main>
+<script>
+const PASSPORT={"passport":{"format":"Voluntary digital product passport. Laid out like the content the EU Joint Research Centre proposed for textile apparel in May 2026 (Study on DPP content for textile apparel products under ESPR). Not yet required by law.","status":"Prototype","version":"0.1","updated":"2026-11-10","url":"https://nike.lucasfmiller.com/care/","dataCarrier":"NFC tag in the jacket (opens nike.lucasfmiller.com)"},"identification":{"product":"Rear Radar Jacket","model":"Prototype","modelId":null,"batch":null,"serial":null,"gtin":null},"producer":{"designer":"Lucas Miller","manufacturer":null,"address":null,"facility":null,"countryOfManufacture":null},"composition":[{"part":"Body","construction":"Fleece","textile":true,"fibres":[{"fibre":"Cotton","percent":100}]},{"part":"Pockets","construction":"Vinyl laminate","textile":false,"fibres":[]}],"care":{"symbols":[{"id":"wash30","process":"Washing","title":"Machine wash cold","text":"30 °C max, normal cycle"},{"id":"tumbleLow","process":"Tumble drying","title":"Tumble dry low","text":"Warm, not hot: 60 °C max"}],"toConfirm":[{"process":"Bleaching","suggested":"noBleach"},{"process":"Ironing","suggested":"ironLow","note":"Keep the iron off the vinyl pockets"},{"process":"Professional cleaning","suggested":"noDryClean"}],"beforeWashing":["Unplug both sleeve motors from the radar unit","Take the radar unit off the jacket"],"afterWashing":["Let the jacket dry completely before plugging the motors back in"],"notes":["The sleeve motors are sealed and stay in the jacket"]},"electronics":{"removable":[{"part":"Radar unit","where":"Upper back","contains":"24 GHz radar (LD2450), ESP32-C3 controller, motion sensor (MPU-6050)","power":"USB-C"}],"stayIn":[{"part":"Sleeve motors","where":"Left and right wrist","note":"Sealed coin vibration motors on leads that plug into the radar unit (L and R)"}],"radio":"Bluetooth Low Energy and Wi-Fi (2.4 GHz) from the controller; 24 GHz radar"},"durability":{"robustnessScore":null},"substancesOfConcern":null,"recycledContent":null,"organicContent":null,"environmentalFootprint":null,"repair":["Each motor plugs into the radar unit (L and R), so either one can be swapped on its own"],"endOfLife":["Radar unit and motors: electrical waste (WEEE) collection, not textile recycling","Jacket: textile collection once the motors and their leads are taken out"],"documents":[],"media":{"model3d":{"glb":"models/jacket.glb","usdz":"models/jacket.usdz"},"fabricationPhoto":"images/fabrication.jpg"}};
+// ---------- Care symbols (drawn like ISO 3758) and the radar-unit pictogram ----------
+const CARE_SVG={
+ wash30:'<path d="M5 15c3-3.6 6-3.6 9.5 0s6.3 3.6 9.5 0 6.3-3.6 9.5 0 6-3.6 9 0"/><path d="M5.6 18.5L9.6 41h28.8l4-22.5"/><text x="24" y="35" text-anchor="middle" font-size="12.5" font-weight="700" fill="currentColor" stroke="none" font-family="-apple-system,Helvetica,Arial,sans-serif">30</text>',
+ tumbleLow:'<rect x="6" y="6" width="36" height="36" rx="1.5"/><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/>',
+ tumbleNormal:'<rect x="6" y="6" width="36" height="36" rx="1.5"/><circle cx="24" cy="24" r="13"/><circle cx="19.5" cy="24" r="2.4" fill="currentColor" stroke="none"/><circle cx="28.5" cy="24" r="2.4" fill="currentColor" stroke="none"/>',
+ noBleach:'<path d="M24 7l19 33H5z"/><path d="M11 13l26 26M37 13L11 39"/>',
+ ironLow:'<path d="M6 37h36c0-10-4.5-17-14-17H17c-2 0-3-1.6-3-3.4V14h-3"/><path d="M14 20h4"/><circle cx="26" cy="30.5" r="2.3" fill="currentColor" stroke="none"/>',
+ noIron:'<path d="M6 37h36c0-10-4.5-17-14-17H17c-2 0-3-1.6-3-3.4V14h-3"/><path d="M10 12l28 28M38 12L10 40"/>',
+ noDryClean:'<circle cx="24" cy="24" r="16"/><path d="M10 10l28 28M38 10L10 38"/>',
+ unitOut:'<rect x="5.5" y="13" width="22" height="22" rx="5"/><circle cx="16.5" cy="24" r="3.4"/><path d="M12 13v-4M21 13v-4M31.5 24H43M38.5 19.5L43 24l-4.5 4.5"/>'
+};
+const careIcon=(id,cls)=>'<svg class="'+(cls||'csym')+'" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(CARE_SVG[id]||'')+'</svg>';
+function compositionLine(c){return c.map(p=>p.textile&&p.fibres.length?p.part+': '+p.fibres.map(f=>f.percent+'% '+f.fibre.toLowerCase()).join(', ')+' '+p.construction.toLowerCase():p.part+': '+p.construction.toLowerCase()).join(' · ');}
+// The small care card on the live pages (the full label and passport are on /care/)
+function renderCareCard(){
+ const P=CARE_DATA;if(!$('careSyms'))return;
+ $('careSyms').innerHTML=P.care.symbols.map(s=>'<div class="crow">'+careIcon(s.id)+'<div><b>'+s.title+'</b><small>'+s.text+'</small></div></div>').join('');
+ setText('careComp',compositionLine(P.composition));
+ if($('careOut'))$('careOut').innerHTML=careIcon('unitOut','')+'<span><b>Before washing:</b> '+P.care.beforeWashing.join(', ').toLowerCase().replace(/^./,c=>c.toUpperCase())+'. '+P.care.notes[0]+'.</span>';
+}
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rows=list=>list.filter(r=>r[1]!==null&&r[1]!==undefined&&r[1]!=='').map(r=>'<tr><th>'+esc(r[0])+'</th><td>'+esc(r[1])+'</td></tr>').join('');
+const P=PASSPORT;
+$('name').textContent=P.identification.product;$('status').textContent=P.passport.status;
+// care
+$('before').innerHTML=careIcon('unitOut','')+'<div><b>Before washing</b><ol>'+P.care.beforeWashing.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol></div>';
+$('symbols').innerHTML=P.care.symbols.map(s=>'<div class="crow">'+careIcon(s.id)+'<div><b>'+esc(s.title)+'</b><small>'+esc(s.text)+'</small></div></div>').join('');
+$('after').innerHTML=P.care.afterWashing.concat(P.care.notes).map(s=>'<li>'+esc(s)+'</li>').join('');
+// materials
+$('materials').innerHTML=P.composition.map(c=>'<tr><th>'+esc(c.part)+'</th><td>'+esc(c.fibres.length?c.fibres.map(f=>f.percent+'% '+f.fibre).join(', ')+' ('+c.construction.toLowerCase()+')':c.construction)+'</td></tr>').join('');
+$('compShort').textContent=compositionLine(P.composition);
+// electronics
+const E=P.electronics;
+$('electronics').innerHTML=E.removable.map(r=>'<tr><th>'+esc(r.part)+'<br><small style="font-weight:400">'+esc(r.where)+', comes out</small></th><td>'+esc(r.contains)+'. Power: '+esc(r.power)+'</td></tr>').join('')+
+ E.stayIn.map(r=>'<tr><th>'+esc(r.part)+'<br><small style="font-weight:400">'+esc(r.where)+', stays in</small></th><td>'+esc(r.note)+'</td></tr>').join('')+
+ rows([['Radio',E.radio]]);
+$('repair').innerHTML=P.repair.map(s=>'<li>'+esc(s)+'</li>').join('');
+$('eol').innerHTML=P.endOfLife.map(s=>'<li>'+esc(s)+'</li>').join('');
+// passport: only what's filled in
+const I=P.identification,Pr=P.producer;
+$('passport').innerHTML=rows([['Product',I.product],['Model',I.model],['Model ID',I.modelId],['Batch',I.batch],['Serial',I.serial],['GTIN',I.gtin],
+ ['Designer',Pr.designer],['Manufacturer',Pr.manufacturer],['Address',Pr.address],['Made in',Pr.countryOfManufacture],
+ ['Fibre composition',compositionLine(P.composition)],['Care',P.care.symbols.map(s=>s.title).join(', ')],
+ ['Durability score',P.durability.robustnessScore],['Recycled content',P.recycledContent],['Substances of concern',P.substancesOfConcern],
+ ['Data carrier',P.passport.dataCarrier],['Passport version',P.passport.version+', updated '+P.passport.updated]]);
+$('pformat').textContent=P.passport.format;
+$('law').textContent='EU rules for textile passports aren’t adopted yet: the textiles act under the Ecodesign Regulation (ESPR) is expected in late 2027, with about 18 months before it applies. The May 2026 proposal leaves smart textiles out of its scope, so for a jacket with electronics this passport is voluntary.';
+$('foot').textContent='Updated '+new Date(P.passport.updated+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+// the 3D model and the photo, once they're uploaded
+(async()=>{
+ const M=P.media.model3d;
+ try{const r=await fetch(M.glb,{method:'HEAD',cache:'no-store'});
+  if(r.ok){const mv=document.createElement('model-viewer');mv.setAttribute('src',M.glb);
+   mv.setAttribute('camera-controls','');mv.setAttribute('auto-rotate','');mv.setAttribute('shadow-intensity','1');mv.setAttribute('ar','');
+   mv.setAttribute('alt','3D model of the '+P.identification.product);
+   try{const u=await fetch(M.usdz,{method:'HEAD',cache:'no-store'});if(u.ok)mv.setAttribute('ios-src',M.usdz);}catch(e){}
+   $('model').innerHTML='';$('model').append(mv);}
+ }catch(e){}
+ const img=new Image();img.alt='Fabrication of the '+P.identification.product;
+ img.onload=()=>{$('photo').innerHTML='';$('photo').append(img);};img.src=P.media.fabricationPhoto;
+})();
+</script></body></html>
